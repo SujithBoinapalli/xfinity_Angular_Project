@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="xfinityApp">
+<head>
+  <title>Angular Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="app.js"></script>  
+  <script src="xfinityService.js"></script>   
+<style>
+.container-fluid {
+	margin-top: 20px;
+}
+table {
+	margin: 0 auto;
+}
+tr {
+	text-align: center;
+}
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 10px 15px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+a:hover {
+	cursor: pointer;
+}
+.categoryList {
+	margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid" ng-controller="xfinityController">
+		<table>
+            <tr>
+                <th><a ng-click="sortBy('name')">Name</a></th>			
+                <th><a ng-click="sortBy('category')">Category</a></th>
+				<th><a ng-click="sortBy('amount')">Amount</a></th>
+            </tr>
+            <tr ng-repeat="data in xfinityData | orderBy:propertyName:reverse">
+                <td>{{data.name}}</td>
+                <td>{{data.category}}</td>
+				<td>{{data.amount}}</td>
+            </tr>
+        </table> 
+		
+		<table class="categoryList">
+            <tr>
+				<th ng-repeat="category in allCategories">{{category.name}}</th>			
+            </tr>			
+			<tr ng-repeat="(key, listItem) in categoryWiseList |orderBy:'name'">
+				<td ng-repeat="(key, listValue) in listItem">{{listValue}}</td>
+			</tr>
+        </table> 
+</div>
+</body>
+</html>
